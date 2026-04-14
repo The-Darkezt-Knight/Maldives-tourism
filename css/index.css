@@ -307,31 +307,71 @@ body{
 }
 
 .marquee-shell {
+    position: relative;
     width: 100%;
-    overflow: visible;
+    overflow: hidden;
     border: 1px solid var(--marquee-border);
-    border-radius: 14px;
-    padding: 2px;
+    border-radius: 18px;
+    padding: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.08));
 }
 
 .marquee-viewport {
+    position: relative;
     width: 100%;
-    overflow-x: hidden;
-    overflow-y: visible;
+    overflow: hidden;
+}
+
+.marquee-viewport::before,
+.marquee-viewport::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 62px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.marquee-viewport::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--page-bg), rgba(255, 255, 255, 0));
+}
+
+.marquee-viewport::after {
+    right: 0;
+    background: linear-gradient(270deg, var(--page-bg), rgba(255, 255, 255, 0));
 }
 
 .marquee-container {
+    --marquee-gap: 16px;
     width: max-content;
-    gap: 10px;
-    padding: 12px 0;
-    animation: marqueeRightToLeft 35s linear infinite;
+    align-items: stretch;
+    gap: var(--marquee-gap);
+    padding: 18px 14px;
+    animation: marqueeRightToLeft 42s linear infinite;
     will-change: transform;
 }
 
 .marquee-container .card {
     flex: 0 0 auto;
-    margin-top: -10px;
-    margin-bottom: -10px;
+    width: clamp(240px, 28vw, 340px);
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+}
+
+.marquee-container .card img {
+    height: 190px;
+    object-fit: cover;
+}
+
+.marquee-container .card .card-body {
+    min-height: 185px;
+}
+
+.marquee-shell:hover .marquee-container {
+    animation-play-state: paused;
 }
 
 body.night-mode {
@@ -381,6 +421,18 @@ body.night-mode .checkbox-wrapper-5 .check {
     background: linear-gradient(90deg, #ffbe78, #ff894f);
 }
 
+body.night-mode .marquee-shell {
+    background: linear-gradient(180deg, rgba(83, 55, 35, 0.45), rgba(44, 28, 19, 0.18));
+}
+
+body.night-mode .marquee-viewport::before {
+    background: linear-gradient(90deg, #2a1d14, rgba(42, 29, 20, 0));
+}
+
+body.night-mode .marquee-viewport::after {
+    background: linear-gradient(270deg, #2a1d14, rgba(42, 29, 20, 0));
+}
+
 body.night-mode .footer-kicker,
 body.night-mode .footer-column-title,
 body.night-mode .footer-note,
@@ -396,7 +448,7 @@ body.night-mode .footer-bottom {
         transform: translateX(0);
     }
     to {
-        transform: translateX(calc(-50% - 5px));
+        transform: translateX(calc(-50% - (var(--marquee-gap) / 2)));
     }
 }
 
@@ -554,7 +606,7 @@ body.night-mode .footer-bottom {
     }
 
     .marquee-container .card {
-        width: min(75vw, 330px);
+        width: min(72vw, 320px);
     }
 
     .footer-inspiration {
@@ -625,7 +677,7 @@ body.night-mode .footer-bottom {
     }
 
     .marquee-container .card {
-        width: min(82vw, 310px);
+        width: min(80vw, 300px);
     }
 
     .footer-main-title {
@@ -672,7 +724,7 @@ body.night-mode .footer-bottom {
     }
 
     .marquee-container .card {
-        width: min(88vw, 290px);
+        width: min(86vw, 280px);
     }
 
     .footer-inspiration {
