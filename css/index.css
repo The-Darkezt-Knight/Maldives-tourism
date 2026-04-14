@@ -32,13 +32,13 @@ body{
 }
 
 .moving-image {
-    height: 700px;
+    height: clamp(300px, 68vh, 700px);
     width: 100%;
 }
 
 /* The height of the img must be the same as #carousel*/
 .carousel-item img {
-    height: 700px;
+    height: clamp(300px, 68vh, 700px);
     width: 100%;
     object-fit: cover;
     filter: brightness(60%);
@@ -230,13 +230,28 @@ body{
     gap: 20px;
 }
 
+.about-section {
+    padding-inline: clamp(16px, 7vw, 100px);
+}
+
+.about-row {
+    width: 100%;
+    max-width: 1280px;
+    align-items: center;
+    row-gap: 20px;
+}
+
+.about-row .description {
+    margin-bottom: 0;
+}
+
 #nav-link a:hover {
     background-color: var(--nav-hover-bg);
     color: var(--nav-hover-text);
 }
 
 .card {
-    width: 400px;
+    width: min(100%, 400px);
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     box-shadow: 0 12px 24px rgba(6, 54, 78, 0.08);
@@ -260,7 +275,7 @@ body{
     font-weight: 400;
     letter-spacing: 1px;
     color: var(--text-muted);
-    line-height: 0.5;
+    line-height: 1.45;
 }
 
 .title {
@@ -276,8 +291,19 @@ body{
 }
 
 .traits img {
-    width: 400px;
+    width: min(100%, 400px);
     border-radius: 10px;
+}
+
+.places-grid {
+    flex-wrap: wrap;
+    justify-content: center !important;
+    align-items: stretch;
+    gap: 24px;
+}
+
+.places-grid .card {
+    flex: 1 1 280px;
 }
 
 .marquee-shell {
@@ -484,6 +510,58 @@ body.night-mode .footer-bottom {
     color: #e0f7ff;
 }
 
+@media (max-width: 992px) {
+    .nav-shell {
+        justify-content: center;
+        flex-wrap: wrap;
+        row-gap: 10px;
+    }
+
+    #nav-link {
+        width: 100%;
+        gap: 12px;
+    }
+
+    #nav-link .nav-link {
+        padding: 7px 12px;
+        font-size: 0.94rem;
+    }
+
+    .checkbox-wrapper-5 {
+        order: 2;
+        width: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .checkbox-wrapper-5 .check {
+        --size: 32px;
+    }
+
+    .heading {
+        font-size: clamp(2rem, 4.8vw, 2.35rem);
+        letter-spacing: 2px;
+    }
+
+    .reason-title {
+        font-size: clamp(1.8rem, 6vw, 3.5rem);
+    }
+
+    #places,
+    #food-lifestyle {
+        padding: 2.75rem 1.75rem !important;
+    }
+
+    .marquee-container .card {
+        width: min(75vw, 330px);
+    }
+
+    .footer-inspiration {
+        flex-wrap: wrap;
+    }
+}
+
 @media (max-width: 768px) {
     #main-nav {
         position: static;
@@ -492,6 +570,15 @@ body.night-mode .footer-bottom {
     .nav-shell {
         justify-content: space-between;
         flex-wrap: wrap;
+    }
+
+    #nav-link {
+        gap: 8px;
+    }
+
+    #nav-link .nav-link {
+        padding: 6px 10px;
+        font-size: 0.9rem;
     }
 
     .checkbox-wrapper-5 {
@@ -508,7 +595,37 @@ body.night-mode .footer-bottom {
     }
 
     .reason-title {
-        font-size: clamp(1.6rem, 9vw, 2.7rem);
+        font-size: clamp(1.5rem, 8.6vw, 2.7rem);
+    }
+
+    .about-row {
+        text-align: center;
+    }
+
+    .about-row > [class*="col-sm-"] {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .about-row .title,
+    .about-row .description {
+        text-align: center !important;
+    }
+
+    .about-row .ps-5,
+    .about-row .pe-5 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        align-items: center !important;
+    }
+
+    #places,
+    #food-lifestyle {
+        padding: 2.2rem 1.1rem !important;
+    }
+
+    .marquee-container .card {
+        width: min(82vw, 310px);
     }
 
     .footer-main-title {
@@ -517,5 +634,50 @@ body.night-mode .footer-bottom {
 
     .footer-purpose {
         font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    #nav-link {
+        gap: 6px;
+    }
+
+    #nav-link .nav-link {
+        padding: 5px 9px;
+        font-size: 0.82rem;
+    }
+
+    .checkbox-wrapper-5 .check {
+        --size: 27px;
+    }
+
+    .heading {
+        font-size: clamp(1.5rem, 7.2vw, 2rem);
+        letter-spacing: 1px;
+        text-align: center;
+    }
+
+    .subheading {
+        text-align: center;
+        line-height: 1.55;
+    }
+
+    .about-section {
+        padding-inline: 14px;
+    }
+
+    #places,
+    #food-lifestyle {
+        padding: 1.8rem 0.85rem !important;
+    }
+
+    .marquee-container .card {
+        width: min(88vw, 290px);
+    }
+
+    .footer-inspiration {
+        width: 100%;
+        justify-content: center;
+        border-radius: 16px;
     }
 }
