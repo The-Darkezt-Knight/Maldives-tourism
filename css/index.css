@@ -19,6 +19,9 @@
     --toggle-bg: #ffffff;
     --toggle-text: #103346;
     --toggle-border: rgba(0, 150, 199, 0.34);
+    --hero-cta-bg: linear-gradient(135deg, #0a91c7 0%, #0077b6 100%);
+    --hero-cta-text: #f0f9ff;
+    --hero-cta-glass: rgba(255, 255, 255, 0.17);
 }
 
 body{
@@ -41,6 +44,112 @@ body{
     width: 100%;
     object-fit: cover;
     filter: brightness(60%);
+}
+
+#carousel {
+    position: relative;
+}
+
+.carousel-hero {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(10px, 2.2vw, 18px);
+    text-align: center;
+    padding: 0 clamp(16px, 8vw, 120px);
+    color: #ffffff;
+    background: linear-gradient(180deg, rgba(2, 44, 76, 0.18) 0%, rgba(2, 44, 76, 0.44) 100%);
+    pointer-events: none;
+}
+
+.carousel-hero-title {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 4.8rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.04;
+    text-shadow: 0 6px 28px rgba(0, 0, 0, 0.45);
+}
+
+.carousel-hero-subtext {
+    margin: 0;
+    max-width: 720px;
+    font-size: clamp(1rem, 1.9vw, 1.38rem);
+    font-weight: 500;
+    line-height: 1.45;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.38);
+}
+
+.carousel-hero .button {
+    padding: 15px 20px;
+    font-size: 16px;
+    background: transparent;
+    border: none;
+    position: relative;
+    color: var(--hero-cta-text);
+    z-index: 1;
+    pointer-events: auto;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.carousel-hero .button::after,
+.carousel-hero .button::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    transition: all 0.4s;
+}
+
+.carousel-hero .button::before {
+    transform: translate(0%, 0%);
+    width: 100%;
+    height: 100%;
+    background: var(--hero-cta-bg);
+    border-radius: 10px;
+}
+
+.carousel-hero .button::after {
+    transform: translate(10px, 10px);
+    width: 35px;
+    height: 35px;
+    background: var(--hero-cta-glass);
+    backdrop-filter: blur(5px);
+    border-radius: 50px;
+}
+
+.carousel-hero .button:hover::before {
+    transform: translate(5%, 20%);
+    width: 110%;
+    height: 110%;
+}
+
+.carousel-hero .button:hover::after {
+    border-radius: 10px;
+    transform: translate(0, 0);
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-hero .button:active::after {
+    transition: 0s;
+    transform: translate(0, 5%);
+}
+
+.carousel-hero .button:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.7);
+    outline-offset: 3px;
+}
+
+#carousel .carousel-indicators {
+    z-index: 5;
 }
 
 #choices {
@@ -394,6 +503,9 @@ body.night-mode {
     --toggle-text: #ffe7bf;
     --toggle-border: rgba(255, 190, 110, 0.5);
     --marquee-border: rgba(255, 175, 94, 0.38);
+    --hero-cta-bg: linear-gradient(135deg, #ffbe72 0%, #ff8f4f 100%);
+    --hero-cta-text: #2b170f;
+    --hero-cta-glass: rgba(255, 236, 207, 0.22);
 }
 
 body.night-mode .carousel-item img {
@@ -402,6 +514,14 @@ body.night-mode .carousel-item img {
 
 body.night-mode .reason-overlay {
     background: linear-gradient(180deg, rgba(27, 18, 12, 0.22) 0%, rgba(18, 12, 10, 0.5) 100%);
+}
+
+body.night-mode .carousel-hero {
+    background: linear-gradient(180deg, rgba(29, 19, 12, 0.26) 0%, rgba(18, 12, 9, 0.58) 100%);
+}
+
+body.night-mode .carousel-hero .button {
+    color: var(--hero-cta-text);
 }
 
 body.night-mode #main-nav {
@@ -599,6 +719,19 @@ body.night-mode .footer-bottom {
         font-size: clamp(1.8rem, 6vw, 3.5rem);
     }
 
+    .carousel-hero {
+        padding: 0 clamp(16px, 7vw, 70px);
+        gap: 12px;
+    }
+
+    .carousel-hero-title {
+        font-size: clamp(1.75rem, 6.6vw, 3.1rem);
+    }
+
+    .carousel-hero-subtext {
+        font-size: clamp(0.95rem, 2.1vw, 1.1rem);
+    }
+
     #places,
     #food-lifestyle {
         padding: 2.75rem 1.75rem !important;
@@ -643,6 +776,25 @@ body.night-mode .footer-bottom {
 
     .reason-overlay {
         padding: 0 8vw;
+    }
+
+    .carousel-hero {
+        padding: 0 8vw;
+    }
+
+    .carousel-hero-title {
+        font-size: clamp(1.45rem, 8.8vw, 2.3rem);
+        line-height: 1.08;
+    }
+
+    .carousel-hero-subtext {
+        max-width: 520px;
+        font-size: clamp(0.9rem, 3.6vw, 1rem);
+    }
+
+    .carousel-hero .button {
+        padding: 12px 18px;
+        font-size: 0.9rem;
     }
 
     .reason-title {
@@ -711,6 +863,22 @@ body.night-mode .footer-bottom {
     .subheading {
         text-align: center;
         line-height: 1.55;
+    }
+
+    .carousel-hero {
+        padding: 0 7vw;
+        gap: 10px;
+    }
+
+    .carousel-hero-subtext {
+        font-size: 0.88rem;
+        line-height: 1.4;
+    }
+
+    .carousel-hero .button {
+        width: min(90vw, 290px);
+        padding: 10px 18px;
+        font-size: 0.86rem;
     }
 
     .about-section {
